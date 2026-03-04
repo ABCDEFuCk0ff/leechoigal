@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <h1><a href="index.html" class="header-link">게시판</a></h1>
+        </div>
+    </header>
+
+    <div id="post-view-container" class="main-container">
+        <section class="card">
+            <!-- Post Header -->
+            <div class="post-view-header">
+                <h2 id="post-view-title" class="post-view-title"></h2>
+                <div class="post-view-meta">
+                    <span id="post-view-author" class="meta-author"></span>
+                    <span id="post-view-date" class="meta-date"></span>
+                </div>
+            </div>
+
+            <!-- Post Content -->
+            <div id="post-view-content" class="post-view-content"></div>
+
+            <!-- Comment Section -->
+            <div class="comment-section">
+                <h3 class="comment-title">댓글</h3>
+                <form id="comment-form" class="comment-form">
+                    <div class="comment-input-area">
+                        <div class="comment-author-toggle-group">
+                            <label>작성자</label>
+                            <div class="author-toggle">
+                                <span class="author-name" id="comment-author-seungho">이승호</span>
+                                <label class="switch">
+                                    <input type="checkbox" id="comment-author-switch">
+                                    <span class="slider"></span>
+                                </label>
+                                <span class="author-name" id="comment-author-eunseong">최은성</span>
+                            </div>
+                        </div>
+                        <textarea id="comment-input" placeholder="따뜻한 댓글을 남겨주세요." required></textarea>
+                    </div>
+                    <button type="submit">등록</button>
+                </form>
+                <div id="comment-list" class="comment-list">
+                    <!-- 댓글 목록 -->
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="post-actions">
+                <button id="detail-delete-button" class="btn-delete-detail">삭제</button>
+                <a href="index.html" class="btn-back">목록으로</a>
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="detail.js"></script>
+</body>
+</html>

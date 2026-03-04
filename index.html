@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-top">
+            <div class="header-left">
+                <h1>이승호최은성 공부갤러리</h1>
+                <div class="layout-toggle">
+                    <label class="switch">
+                        <input type="checkbox" id="layout-toggle-switch">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="layout-text">세로 보기</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- 글쓰기 폼 -->
+        <section class="card write-section">
+            <h2 class="section-title">✏️ 글 작성하기</h2>
+            <form class="write-form" id="post-form">
+                <div class="form-row">
+                    <div class="form-group flex-grow">
+                        <label for="title">제목</label>
+                        <input type="text" id="title" name="title" placeholder="제목을 입력하세요" required>
+                    </div>
+                    <div class="form-group author-toggle-group">
+                        <label>작성자</label>
+                        <div class="author-toggle">
+                            <span class="author-name" id="author-seungho">이승호</span>
+                            <label class="switch">
+                                <input type="checkbox" id="author-switch">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="author-name" id="author-eunseong">최은성</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea id="content" name="content" placeholder="내용을 자유롭게 작성해주세요" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">등록하기</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 게시물 목록 -->
+        <section class="card list-section">
+            <div class="list-header">
+                <h2 class="section-title">📋 게시글 목록</h2>
+                <button id="reset-button" class="btn-reset">전체 초기화</button>
+            </div>
+            <table class="board-list">
+                <thead>
+                    <tr>
+                        <th width="10%">번호</th>
+                        <th width="50%">제목</th>
+                        <th width="15%">글쓴이</th>
+                        <th width="15%">날짜</th>
+                        <th width="10%">관리</th>
+                    </tr>
+                </thead>
+                <tbody id="post-list-body">
+                    <!-- 게시글 목록이 여기에 동적으로 추가됩니다. -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
