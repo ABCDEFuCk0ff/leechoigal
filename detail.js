@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, doc, getDoc, updateDoc, arrayUnion, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, updateDoc, arrayUnion, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCnTxGemcsrYzwB14Wx-70zS_w7Wz3QLIo",
@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const commentList = document.getElementById('comment-list');
     const commentForm = document.getElementById('comment-form');
     const commentInput = document.getElementById('comment-input');
-    const detailDeleteButton = document.getElementById('detail-delete-button');
  
     // 댓글 작성자 토글 요소
     const commentAuthorSwitch = document.getElementById('comment-author-switch');
@@ -123,20 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
          commentAuthorSwitch.checked = true;
          updateCommentAuthorToggleUI();
     });
- 
-    // 게시글 삭제
-    detailDeleteButton.addEventListener('click', async () => {
-         if (confirm('이 게시물을 삭제하시겠습니까?')) {
-             try {
-                 await deleteDoc(postRef);
-                 alert('게시물이 삭제되었습니다.');
-                 window.location.href = 'index.html';
-             } catch (error) {
-                 console.error("Error deleting document: ", error);
-                 alert("삭제 실패");
-             }
-         }
-     });
  
     // 댓글 작성
     commentForm.addEventListener('submit', async (e) => {

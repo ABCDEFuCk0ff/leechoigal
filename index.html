@@ -20,6 +20,16 @@
                     <span class="layout-text">세로 보기</span>
                 </div>
             </div>
+            <div class="header-right">
+                <div class="pill-toggle-wrapper header-category-toggle">
+                    <input type="checkbox" id="category-toggle" class="pill-toggle-checkbox">
+                    <div class="pill-toggle-track">
+                        <div class="pill-toggle-bg"></div>
+                        <div class="pill-toggle-option active" id="category-free">자유</div>
+                        <div class="pill-toggle-option" id="category-study">공부</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -29,20 +39,33 @@
             <h2 class="section-title">✏️ 글 작성하기</h2>
             <form class="write-form" id="post-form">
                 <div class="form-row">
+                    <div class="form-group toggle-group">
+                        <label>카테고리</label>
+                        <div class="pill-toggle-wrapper">
+                            <input type="checkbox" id="form-category-toggle" class="pill-toggle-checkbox">
+                            <div class="pill-toggle-track">
+                                <div class="pill-toggle-bg"></div>
+                                <div class="pill-toggle-option active" id="form-category-free">자유</div>
+                                <div class="pill-toggle-option" id="form-category-study">공부</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group toggle-group">
+                        <label>작성자</label>
+                        <div class="pill-toggle-wrapper">
+                            <input type="checkbox" id="author-switch" class="pill-toggle-checkbox">
+                            <div class="pill-toggle-track">
+                                <div class="pill-toggle-bg"></div>
+                                <div class="pill-toggle-option active" id="author-seungho">이승호</div>
+                                <div class="pill-toggle-option" id="author-eunseong">최은성</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group flex-grow">
                         <label for="title">제목</label>
                         <input type="text" id="title" name="title" placeholder="제목을 입력하세요" required>
-                    </div>
-                    <div class="form-group author-toggle-group">
-                        <label>작성자</label>
-                        <div class="author-toggle">
-                            <span class="author-name" id="author-seungho">이승호</span>
-                            <label class="switch">
-                                <input type="checkbox" id="author-switch">
-                                <span class="slider"></span>
-                            </label>
-                            <span class="author-name" id="author-eunseong">최은성</span>
-                        </div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -50,7 +73,7 @@
                     <textarea id="content" name="content" placeholder="내용을 자유롭게 작성해주세요" required></textarea>
                 </div>
                 <div class="form-actions">
-                    <button type="submit" class="btn-submit">등록하기</button>
+                    <button type="submit" id="submit-button" class="btn-submit" disabled>등록하기</button>
                 </div>
             </form>
         </section>
@@ -59,7 +82,6 @@
         <section class="card list-section">
             <div class="list-header">
                 <h2 class="section-title">📋 게시글 목록</h2>
-                <button id="reset-button" class="btn-reset">전체 초기화</button>
             </div>
             <table class="board-list">
                 <thead>
@@ -68,7 +90,6 @@
                         <th width="50%">제목</th>
                         <th width="15%">글쓴이</th>
                         <th width="15%">날짜</th>
-                        <th width="10%">관리</th>
                     </tr>
                 </thead>
                 <tbody id="post-list-body">

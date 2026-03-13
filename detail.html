@@ -34,13 +34,13 @@
                     <div class="comment-input-area">
                         <div class="comment-author-toggle-group">
                             <label>작성자</label>
-                            <div class="author-toggle">
-                                <span class="author-name" id="comment-author-seungho">이승호</span>
-                                <label class="switch">
-                                    <input type="checkbox" id="comment-author-switch">
-                                    <span class="slider"></span>
-                                </label>
-                                <span class="author-name" id="comment-author-eunseong">최은성</span>
+                            <div class="pill-toggle-wrapper">
+                                <input type="checkbox" id="comment-author-switch" class="pill-toggle-checkbox">
+                                <div class="pill-toggle-track">
+                                    <div class="pill-toggle-bg"></div>
+                                    <div class="pill-toggle-option active" id="comment-author-seungho">이승호</div>
+                                    <div class="pill-toggle-option" id="comment-author-eunseong">최은성</div>
+                                </div>
                             </div>
                         </div>
                         <textarea id="comment-input" placeholder="따뜻한 댓글을 남겨주세요." required></textarea>

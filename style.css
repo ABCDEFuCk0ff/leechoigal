@@ -18,7 +18,7 @@ a { text-decoration: none; color: #333; }
 /* 헤더 스타일 */
 header {
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-bottom: 1px solid #e1e4e8; /* 그림자 대신 깔끔한 선 적용 */
     padding: 15px 0;
     margin-bottom: 20px;
 }
@@ -27,6 +27,9 @@ header {
     max-width: 800px;
     margin: 0 auto;
     padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .header-left {
@@ -59,6 +62,11 @@ header h1 a.header-link {
     text-decoration: none;
 }
 
+/* 헤더 내 카테고리 토글 (자유/공부) */
+.header-category-toggle {
+    width: 240px; /* 글자에 맞게 더 넓게 수정 */
+}
+
 /* 메인 컨테이너 */
 .main-container {
     max-width: 800px;
@@ -70,7 +78,7 @@ header h1 a.header-link {
 .card {
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #e1e4e8; /* 과도한 입체감 제거, 테두리 적용 */
     padding: 25px;
     margin-bottom: 25px;
 }
@@ -95,8 +103,8 @@ header h1 a.header-link {
     margin-bottom: 15px;
 }
 
-.write-form .author-toggle-group {
-    width: 180px; /* 토글 스위치 영역 너비 고정 */
+.write-form .toggle-group {
+    width: 240px; /* 토글 폭 넓게 수정 (작성자, 카테고리 공통) */
     margin-bottom: 15px;
 }
 
@@ -115,19 +123,19 @@ header h1 a.header-link {
 .write-form input[type="text"],
 .write-form textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
+    padding: 14px; /* 터치 영역 확보 및 직관성 증대 */
+    border: 1px solid #ced4da; /* 더 명확한 테두리 */
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 15px;
     transition: border-color 0.2s;
-    background-color: #f9f9f9;
+    background-color: #fff; /* 흰색 배경으로 직관성 최대화 */
 }
 
 .write-form input[type="text"]:focus,
 .write-form textarea:focus {
     border-color: #3b4890;
     outline: none;
-    background-color: #fff;
+    box-shadow: 0 0 0 2px rgba(59, 72, 144, 0.1); /* 부드러운 포커스 효과 */
 }
 
 .write-form textarea {
@@ -155,6 +163,12 @@ header h1 a.header-link {
     background-color: #2c366f;
 }
 
+/* 등록 버튼 비활성화 상태 */
+.btn-submit:disabled {
+    background-color: #cdd2e0;
+    cursor: not-allowed;
+}
+
 /* 세로 보기 레이아웃 */
 .main-container.vertical-view .write-form .form-row {
     flex-direction: column;
@@ -166,28 +180,61 @@ header h1 a.header-link {
     margin-bottom: 15px;
 }
 
+.main-container.vertical-view .write-form .toggle-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
 
 /* 작성자 토글 스위치 */
-.author-toggle {
+.pill-toggle-wrapper {
+    position: relative;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.pill-toggle-checkbox {
+    display: none;
+}
+
+.pill-toggle-track {
     display: flex;
+    background-color: #e9ecef;
+    border-radius: 10px; /* 둥근 네모 모양으로 변경 */
+    position: relative;
+    padding: 4px;
+    height: 42px;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: 8px; /* label과의 간격 */
-    padding: 0 5px;
+    border: 1px solid #dee2e6; /* 트랙 테두리 추가 */
+    background-color: #f8f9fa;
 }
 
-.author-name {
-    font-size: 15px;
-    font-weight: 500;
-    color: #aaa;
-    transition: all 0.2s ease;
+/* 움직이는 배경 (파란색) */
+.pill-toggle-bg {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    bottom: 4px;
+    width: calc(50% - 4px); /* 전체의 절반 크기 */
+    background-color: #3b4890;
+    border-radius: 8px; /* 둥근 네모 모양으로 변경 */
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    z-index: 1;
+}
+
+.pill-toggle-option {
+    flex: 1;
+    text-align: center;
+    z-index: 2;
+    font-weight: 600;
+    font-size: 14px;
+    color: #868e96; /* 비활성 텍스트 색상 */
     cursor: pointer;
+    user-select: none;
+    transition: color 0.3s;
 }
 
-.author-name.active {
-    color: #3b4890;
-    font-weight: bold;
+.pill-toggle-option.active {
+    color: #fff; /* 활성 텍스트 색상 */
 }
 
 /* The switch - a box around the slider */
@@ -237,6 +284,25 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(20px);
 }
+
+/* --- 토글 중립(Neutral) 상태: 선택 전 가운데 배치 --- */
+.pill-toggle-wrapper.neutral .pill-toggle-bg {
+    left: 50%;
+    width: 50%; /* 기준 너비 */
+    transform: translateX(-50%) scaleX(0.2); /* 가운데 작은 바 형태로 축소 */
+    background-color: #adb5bd; /* 중립적인 회색 */
+}
+
+/* 필 토글: 체크박스 상태에 따른 배경 이동 */
+.pill-toggle-checkbox:checked + .pill-toggle-track .pill-toggle-bg {
+    transform: translateX(100%);
+}
+
+/* 중립 상태일 때는 체크박스 상태 무시하고 가운데 유지 */
+.pill-toggle-wrapper.neutral .pill-toggle-checkbox:checked + .pill-toggle-track .pill-toggle-bg {
+    transform: translateX(-50%) scaleX(0.2);
+}
+
 
 /* --- 게시물 목록 --- */
 .list-header {
@@ -291,36 +357,14 @@ input:checked + .slider:before {
     text-decoration: underline;
 }
 
-.btn-reset {
-    background-color: #fff;
-    color: #e74c3c;
-    border: 1px solid #e74c3c;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s;
+/* 세로 보기 모드: 날짜 숨기고 제목 넓게 설정 */
+.main-container.vertical-view .board-list th:nth-child(4),
+.main-container.vertical-view .board-list td:nth-child(4) {
+    display: none;
 }
 
-.btn-reset:hover {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.btn-delete-row {
-    background-color: #f1f3f5;
-    color: #868e96;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.btn-delete-row:hover {
-    background-color: #e74c3c;
-    color: white;
+.main-container.vertical-view .board-list th:nth-child(2) {
+    width: 65%; /* 날짜 칸(15%)이 사라진 만큼 제목 공간 확보 */
 }
 
 /* --- 게시물 상세 보기 --- */
@@ -396,16 +440,13 @@ input:checked + .slider:before {
 .comment-author-toggle-group {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     margin-bottom: 10px;
 }
 
-.comment-author-toggle-group .author-toggle {
+.comment-author-toggle-group .pill-toggle-wrapper {
+    width: 180px;
     margin-top: 0;
-}
-
-.comment-author-toggle-group label {
-    margin-bottom: 0;
 }
 
 .comment-form textarea {
@@ -491,23 +532,6 @@ input:checked + .slider:before {
 .btn-back:hover {
     background-color: #f8f9fa;
     border-color: #aaa;
-}
-
-.btn-delete-detail {
-    background-color: #fff;
-    color: #e74c3c;
-    border: 1px solid #e74c3c;
-    padding: 12px 40px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.btn-delete-detail:hover {
-    background-color: #e74c3c;
-    color: white;
 }
 
 /* 모바일 대응 */
